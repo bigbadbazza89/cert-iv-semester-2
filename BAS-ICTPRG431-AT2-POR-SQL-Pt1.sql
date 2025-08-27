@@ -36,7 +36,6 @@ CREATE USER 'bas_ictprg431_user1'@'localhost' IDENTIFIED BY 'Cinnamon1000!';
 GRANT ALL ON bas_ictprg431.* TO 'bas_ictprg431_user1'@'localhost' WITH GRANT OPTION; 
 FLUSH PRIVILEGES;
 
-
 -- --------------------------------------------------------------------
 -- Q02 EMPLOYEES TABLE
 -- --------------------------------------------------------------------
@@ -68,8 +67,6 @@ VALUES
     ('1973-07-22', 107, 'Bernard', 3, 106, 'Andy', 65000, 'M'),
     ('1978-10-01', 108, 'Halpert', 3, 106, 'Jen', 71000, 'F');
 
-
-
 -- --------------------------------------------------------------------
 -- Q03 BRANCHES TABLE
 -- --------------------------------------------------------------------
@@ -89,7 +86,6 @@ VALUES
     (2, 'Scranton',   102, "1992-04-06"),
     (3, 'Stamford',   106, "1998-02-13");
 
-
 -- --------------------------------------------------------------------
 -- Q04 CLIENTS TABLE
 -- --------------------------------------------------------------------
@@ -103,8 +99,16 @@ CREATE TABLE `clients` (
     PRIMARY KEY (client_id)
 );
 
-
-
+INSERT INTO `clients`
+	(`client_id`, `client_name`, `branch_id`)
+VALUES
+	(400, 'Dunmore Highschool', 2),
+    (401, 'Lackawana Country', 2),
+	(402, 'FedEx', 3),
+	(403, 'John Daly Law, LLC', 3),
+	(404, 'Scranton Whitepages', 2),
+	(405, 'Times Newspaper', 3),
+	(406, 'FedEx', 2);
 
 -- --------------------------------------------------------------------
 -- Q05 WORKING WITH TABLE
