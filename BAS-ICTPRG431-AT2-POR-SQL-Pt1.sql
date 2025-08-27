@@ -56,13 +56,10 @@ CREATE TABLE `employees` (
 
 
 INSERT INTO `employees` 
-    ( `date_of_birth`, `id`, `family_name`, `branch_id`, `supervisor_id`, `given_name`, `gross_salary`, `gender_identity` )
-VALUES 
-    ( '1967-05-11', 101, 'Levinson', 1, 100, 'Jan', 110000, 'F' );
-
-INSERT INTO `employees` 
     (`date_of_birth`, `id`, `family_name`, `branch_id`, `supervisor_id`, `given_name`, `gross_salary`, `gender_identity`) 
 VALUES
+	('1967-11-17', 100, 'Wallace', 1, Null, 'David', 25000, 'M'),
+    ('1967-05-11', 101, 'Levinson', 1, 100, 'Jan', 110000, 'F'),
     ('1964-03-15', 102, 'Scott', 2, 100, 'Michael', 75000, 'O'),
     ('1971-06-25', 103, 'Martin', 2, 102, 'Angela', 63000, 'F'),
     ('1980-02-05', 104, 'Kapoor', 2, 102, 'Kelly', 55000, 'O'),
@@ -96,6 +93,16 @@ VALUES
 -- --------------------------------------------------------------------
 -- Q04 CLIENTS TABLE
 -- --------------------------------------------------------------------
+
+CREATE TABLE `clients` (
+    `client_id`           BIGINT        UNSIGNED NOT NULL AUTO_INCREMENT,
+    `client_name`         VARCHAR(64)	DEFAULT 'ERROR',
+    `branch_id`           BIGINT        UNSIGNED DEFAULT '0',
+    `created_at`          TIMESTAMP     DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`          TIMESTAMP     ON UPDATE CURRENT_TIMESTAMP, 
+    PRIMARY KEY (client_id)
+);
+
 
 
 
