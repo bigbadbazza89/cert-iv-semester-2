@@ -41,17 +41,18 @@ FLUSH PRIVILEGES;
 -- --------------------------------------------------------------------
 CREATE TABLE `employees` (
     `id`              bigint        UNSIGNED NOT NULL AUTO_INCREMENT,
-    `employee_id`     bigint        DEFAULT '0',
+    `employee_id`     bigint        NOT NULL DEFAULT '0',
     `given_name`      varchar(64),
     `family_name`     varchar(64)   NOT NULL,
     `date_of_birth`   date          DEFAULT '1900-01-01',
     `gender_identity` char(1),
     `gross_salary`    bigint        DEFAULT '0',
     `supervisor_id`   bigint        DEFAULT '0',
-    `branch_id`       bigint        DEFAULT '0', 
+    `branch_id`       bigint        NOT NULL DEFAULT '0', 
     `created_at`      timestamp     DEFAULT CURRENT_TIMESTAMP,
     `updated_at`      timestamp     ON UPDATE CURRENT_TIMESTAMP, 
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    UNIQUE KEY (employee_id)
 );
 
 
@@ -73,13 +74,14 @@ VALUES
 -- --------------------------------------------------------------------
 CREATE TABLE `branches` (
     `id`                  BIGINT        UNSIGNED NOT NULL AUTO_INCREMENT,
-    `branch_id`           BIGINT        DEFAULT '0',
+    `branch_id`           BIGINT        NOT NULL DEFAULT '0',
     `branch_name`         VARCHAR(64)	DEFAULT 'ERROR', 
-    `manager_id`          BIGINT        DEFAULT '0',
+    `manager_id`          BIGINT        NOT NULL DEFAULT '0',
     `manager_started_at`  DATE          DEFAULT '1970-01-01',
     `created_at`          TIMESTAMP     DEFAULT CURRENT_TIMESTAMP,
     `updated_at`          TIMESTAMP     ON UPDATE CURRENT_TIMESTAMP, 
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    UNIQUE KEY (branch_id)
 );
 
 INSERT INTO branches(branch_id,branch_name,manager_id,manager_started_at)
@@ -93,12 +95,14 @@ VALUES
 -- --------------------------------------------------------------------
 
 CREATE TABLE `clients` (
-    `client_id`           BIGINT        UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id`                  BIGINT        UNSIGNED NOT NULL AUTO_INCREMENT,
+    `client_id`           BIGINT        NOT NULL DEFAULT '0',
     `client_name`         VARCHAR(64)	DEFAULT 'ERROR',
-    `branch_id`           BIGINT        UNSIGNED DEFAULT '0',
+    `branch_id`           BIGINT        NOT NULL DEFAULT '0',
     `created_at`          TIMESTAMP     DEFAULT CURRENT_TIMESTAMP,
     `updated_at`          TIMESTAMP     ON UPDATE CURRENT_TIMESTAMP, 
-    PRIMARY KEY (client_id)
+    PRIMARY KEY (id),
+    UNIQUE KEY (client_id)
 );
 
 INSERT INTO `clients`
@@ -116,17 +120,61 @@ VALUES
 -- Q05 WORKING WITH TABLE
 -- --------------------------------------------------------------------
 
+CREATE TABLE `working_with` (
+    `id`            BIGINT     UNSIGNED NOT NULL AUTO_INCREMENT,
+    `employee_id`   BIGINT     NOT NULL DEFAULT '0',
+    `client_id`     BIGINT     NOT NULL DEFAULT '0',
+    `total_sales`   BIGINT     DEFAULT '0',
+    `created_at`    TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`    TIMESTAMP  ON UPDATE CURRENT_TIMESTAMP, 
+    PRIMARY KEY (id)
+);
+
+INSERT INTO working_with(employee_id,client_id,total_sales)
+VALUES
+    (105, 400, 55000),
+    (102, 401, 267000),
+    (108, 402, 22500),
+    (107, 403, 5000),
+    (108, 403, 12000),
+    (105, 404, 33000),
+    (107, 405, 26000),
+    (102, 406, 15000),
+    (105, 406, 130000);
 
 
 -- --------------------------------------------------------------------
 -- Q06 BRANCH SUPPLIER TABLE 
 -- --------------------------------------------------------------------
 
+CREATE TABLE `branch_suppliers` (
+    `id`               BIGINT         UNSIGNED NOT NULL AUTO_INCREMENT,
+    `branch_id`        BIGINT         NOT NULL DEFAULT '0',
+    `supplier_name`    VARCHAR(255)   NOT NULL,
+    `product_supplied` VARCHAR(255)   NOT NULL,
+    `created_at`       TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`       TIMESTAMP  ON UPDATE CURRENT_TIMESTAMP, 
+    PRIMARY KEY (id)
+);
 
+INSERT INTO branch_suppliers(branch_id,supplier_name,product_supplied)
+VALUES
+    (2, 'Hammer Mill', 'Paper'),
+    (2, 'Uni-Ball', 'Writing Instruments'),
+    (3, 'Patriot Paper', 'Paper'),
+    (2, 'J.T. Forms & Labels', 'Custom Forms'),
+    (3, 'Uni-Ball', 'Writing Instruments'),
+    (3, 'Hammer Mill', 'Paper'),
+    (3, 'Stamford Labels', 'Custom Forms');
 
 -- --------------------------------------------------------------------
 -- Q07 DUMMY TABLE
 -- --------------------------------------------------------------------
+
+CREATE TABLE `dummy` (
+    `employee_id` int, 
+    `employee_name` varchar(20)
+);
 
 
 
