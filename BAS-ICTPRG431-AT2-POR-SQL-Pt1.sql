@@ -41,11 +41,12 @@ FLUSH PRIVILEGES;
 -- --------------------------------------------------------------------
 CREATE TABLE `employees` (
     `id`              bigint        UNSIGNED NOT NULL AUTO_INCREMENT,
+    `employee_id`     bigint        DEFAULT '0',
     `given_name`      varchar(64),
     `family_name`     varchar(64)   NOT NULL,
     `date_of_birth`   date          DEFAULT '1900-01-01',
     `gender_identity` char(1),
-    `gross_salary`    int           DEFAULT '0',
+    `gross_salary`    bigint        DEFAULT '0',
     `supervisor_id`   bigint        DEFAULT '0',
     `branch_id`       bigint        DEFAULT '0', 
     `created_at`      timestamp     DEFAULT CURRENT_TIMESTAMP,
@@ -55,7 +56,7 @@ CREATE TABLE `employees` (
 
 
 INSERT INTO `employees` 
-    (`date_of_birth`, `id`, `family_name`, `branch_id`, `supervisor_id`, `given_name`, `gross_salary`, `gender_identity`) 
+    (`date_of_birth`, `employee_id`, `family_name`, `branch_id`, `supervisor_id`, `given_name`, `gross_salary`, `gender_identity`) 
 VALUES
 	('1967-11-17', 100, 'Wallace', 1, Null, 'David', 25000, 'M'),
     ('1967-05-11', 101, 'Levinson', 1, 100, 'Jan', 110000, 'F'),
@@ -72,6 +73,7 @@ VALUES
 -- --------------------------------------------------------------------
 CREATE TABLE `branches` (
     `id`                  BIGINT        UNSIGNED NOT NULL AUTO_INCREMENT,
+    `branch_id`           BIGINT        DEFAULT '0',
     `branch_name`         VARCHAR(64)	DEFAULT 'ERROR', 
     `manager_id`          BIGINT        DEFAULT '0',
     `manager_started_at`  DATE          DEFAULT '1970-01-01',
@@ -80,7 +82,7 @@ CREATE TABLE `branches` (
     PRIMARY KEY (id)
 );
 
-INSERT INTO branches(id,branch_name,manager_id,manager_started_at)
+INSERT INTO branches(branch_id,branch_name,manager_id,manager_started_at)
 VALUES
     (1, 'Corporate',  100, "2006-02-09"),
     (2, 'Scranton',   102, "1992-04-06"),
