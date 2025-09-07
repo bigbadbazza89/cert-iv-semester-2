@@ -33,12 +33,14 @@
 --           all the employees 
 -- --------------------------------------------------------------------
 
+SELECT given_name, family_name from employees;
 
 
 -- --------------------------------------------------------------------
 -- Query 02: Write & run a SQL query to find all clients 
 -- --------------------------------------------------------------------
 
+SELECT client_name FROM clients;
 
 
 -- --------------------------------------------------------------------
@@ -46,6 +48,8 @@
 --           by salary. 
 -- --------------------------------------------------------------------
 
+SELECT given_name, family_name, gross_salary FROM employees
+ORDER BY gross_salary DESC;
 
 
 -- --------------------------------------------------------------------
@@ -53,6 +57,8 @@
 --           ordered by gender 
 -- --------------------------------------------------------------------
 
+SELECT given_name, family_name, gender_identity FROM employees
+ORDER BY gender_identity ASC;
 
 
 -- --------------------------------------------------------------------
@@ -60,6 +66,8 @@
 --           ordered by family name 
 -- --------------------------------------------------------------------
 
+SELECT given_name, family_name, gender_identity FROM employees
+ORDER BY family_name ASC;
 
 
 -- --------------------------------------------------------------------
