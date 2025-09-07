@@ -75,6 +75,8 @@ ORDER BY family_name ASC;
 --           in the table 
 -- --------------------------------------------------------------------
 
+SELECT given_name, family_name FROM employees
+LIMIT 5;
 
 
 -- --------------------------------------------------------------------
@@ -82,26 +84,32 @@ ORDER BY family_name ASC;
 --           starts with a letter ‘A’.
 -- --------------------------------------------------------------------
 
-
+SELECT given_name, family_name FROM employees
+WHERE given_name LIKE 'A%';
 
 -- --------------------------------------------------------------------
 -- Query 08: Write & run a SQL query to sort all the 
 --           employee records in a descending order based on salary.
 -- --------------------------------------------------------------------
 
+SELECT * FROM employees
+ORDER BY gross_salary DESC;
 
 
 -- --------------------------------------------------------------------
 -- Query 09: Write & run a SQL query to find all male employees 
 -- --------------------------------------------------------------------
 
-
+SELECT given_name, family_name FROM employees
+WHERE gender_identity = 'M';
 
 -- --------------------------------------------------------------------
 -- Query 10: Write & run a SQL query to find all employees at the
 --           Scranton Branch (branch 2) 
 -- --------------------------------------------------------------------
 
+SELECT given_name, family_name, branch_id FROM employees
+WHERE branch_id = 2;
 
 
 -- --------------------------------------------------------------------
