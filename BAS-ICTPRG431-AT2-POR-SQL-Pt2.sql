@@ -35,13 +35,11 @@
 
 SELECT given_name, family_name from employees;
 
-
 -- --------------------------------------------------------------------
 -- Query 02: Write & run a SQL query to find all clients 
 -- --------------------------------------------------------------------
 
 SELECT client_name FROM clients;
-
 
 -- --------------------------------------------------------------------
 -- Query 03: Write & run a SQL query to find all employees ordered
@@ -51,7 +49,6 @@ SELECT client_name FROM clients;
 SELECT given_name, family_name, gross_salary FROM employees
 ORDER BY gross_salary DESC;
 
-
 -- --------------------------------------------------------------------
 -- Query 04: Write & run a SQL query to find all employees 
 --           ordered by gender 
@@ -59,7 +56,6 @@ ORDER BY gross_salary DESC;
 
 SELECT given_name, family_name, gender_identity FROM employees
 ORDER BY gender_identity ASC;
-
 
 -- --------------------------------------------------------------------
 -- Query 05: Write & run a SQL query to find all employees
@@ -69,7 +65,6 @@ ORDER BY gender_identity ASC;
 SELECT given_name, family_name, gender_identity FROM employees
 ORDER BY family_name ASC;
 
-
 -- --------------------------------------------------------------------
 -- Query 06: Write & run a SQL query to find first 5 employees 
 --           in the table 
@@ -77,7 +72,6 @@ ORDER BY family_name ASC;
 
 SELECT given_name, family_name FROM employees
 LIMIT 5;
-
 
 -- --------------------------------------------------------------------
 -- Query 07: Write & run a SQL query to find employees whose name 
@@ -95,7 +89,6 @@ WHERE given_name LIKE 'A%';
 SELECT * FROM employees
 ORDER BY gross_salary DESC;
 
-
 -- --------------------------------------------------------------------
 -- Query 09: Write & run a SQL query to find all male employees 
 -- --------------------------------------------------------------------
@@ -111,67 +104,76 @@ WHERE gender_identity = 'M';
 SELECT given_name, family_name, branch_id FROM employees
 WHERE branch_id = 2;
 
-
 -- --------------------------------------------------------------------
 -- Query 11: Write & run a SQL query to find all employee's IDs 
 --           and names who were born after 1969 
 -- --------------------------------------------------------------------
 
-
+SELECT employee_id, given_name, family_name FROM employees
+WHERE date_of_birth > '1969-12-31';
 
 -- --------------------------------------------------------------------
 -- Query 12: Write & run a SQL query to find all female employees 
 --           at Scranton Branch (Branch 2)
 -- --------------------------------------------------------------------
 
-
+SELECT given_name, family_name FROM employees
+WHERE gender_identity = 'F' AND branch_id = 2;
 
 -- --------------------------------------------------------------------
 -- Query 13: Write & run a SQL query to find all female employees 
 --           born after 1969 or who has salary greater than 80000.
 -- --------------------------------------------------------------------
 
-
+SELECT given_name, family_name FROM employees
+WHERE gender_identity = 'F'
+AND (date_of_birth > '1969-12-31' OR gross_salary > 80000);
 
 -- --------------------------------------------------------------------
 -- Query 14: Write & run a SQL query to find all employees born 
 --           between 1970 and 1975.
 -- --------------------------------------------------------------------
 
-
+SELECT given_name, family_name FROM employees
+WHERE date_of_birth BETWEEN '1970-01-01' AND '1975-12-31';
 
 -- --------------------------------------------------------------------
 -- Query 15: Write & run a SQL query to find all the employees 
 --           named Jim, Michael, Johnny or David.
 -- --------------------------------------------------------------------
 
-
+SELECT given_name, family_name FROM employees
+WHERE given_name IN ('JIM', 'MICHAEL', 'JOHNNY', 'DAVID');
 
 -- --------------------------------------------------------------------
 -- Query 16: Write & run a SQL query to find the name of a client who 
 --           has got the word ‘LLC’ in his name.
 -- --------------------------------------------------------------------
 
-
+SELECT client_name FROM clients
+WHERE client_name LIKE '%LLC%';
 
 -- --------------------------------------------------------------------
 -- Query 17: Write & run a SQL query to find any branch suppliers with
 -- label in their name.
 -- --------------------------------------------------------------------
 
-
+SELECT supplier_name FROM branch_suppliers
+WHERE supplier_name LIKE '%label%';
 
 -- --------------------------------------------------------------------
 -- Query 18: Write & run a SQL query to find any employee born on the 
 --           5th day of the month.
 -- --------------------------------------------------------------------
 
-
+SELECT given_name, family_name FROM employees
+WHERE DAY(date_of_birth) = 5;
 
 -- --------------------------------------------------------------------
 -- Query 19: Write & run a SQL query to find any clients who 
 --           has got the word ‘Law’ in their name
 -- --------------------------------------------------------------------
 
-
+SELECT client_name FROM clients
+WHERE client_name LIKE '%Law%';
 
