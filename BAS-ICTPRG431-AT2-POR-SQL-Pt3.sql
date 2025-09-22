@@ -168,3 +168,7 @@ SELECT
     (SELECT SUM(gross_salary) FROM employees) AS total_expenditure,
     (SELECT SUM(total_sales) FROM working_with) AS total_income;
 
+
+
+
+MY GITHUB COMMIT EVIDENCE: https://github.com/bigbadbazza89/cert-iv-semester-2.git
