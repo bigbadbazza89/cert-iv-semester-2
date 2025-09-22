@@ -36,7 +36,6 @@ USE bas_ictprg431;
 SELECT COUNT(*) AS total_employees
 FROM employees;
 
-
 -- --------------------------------------------------------------------
 -- 02	Statistical Queries 2: Total Sales
 -- Write & run an SQL query to find the average totals sales in the working_with table
@@ -45,7 +44,6 @@ FROM employees;
 USE bas_ictprg431;
 SELECT AVG(total_sales) AS average_sales
 FROM working_with;
-
 
 -- --------------------------------------------------------------------
 -- A03	Statistical Queries 3: Total Salaries
@@ -61,21 +59,30 @@ FROM employees;
 -- Write & run a SQL query to find the number of employees by gender
 -- --------------------------------------------------------------------
 
-
+USE bas_ictprg431;
+SELECT gender_identity, COUNT(*) AS employee_count
+FROM employees
+GROUP BY gender_identity;
 
 -- --------------------------------------------------------------------
 -- 05	Statistical Queries 5: Maximum Salary
 -- Write & run an SQL query to find the entire record of the employee with the maximum salary
 -- --------------------------------------------------------------------
 
-
+USE bas_ictprg431;
+SELECT *
+FROM employees
+WHERE gross_salary = (SELECT MAX(gross_salary) FROM employees);
 
 -- --------------------------------------------------------------------
 -- 06	Statistical Queries 6: Employee with Lowest Salary
 -- Write & run a SQL query to find the first name and last name of the employee with the minimum salary
 -- --------------------------------------------------------------------
 
-
+USE bas_ictprg431;
+SELECT given_name, family_name, gross_salary
+FROM employees
+WHERE gross_salary = (SELECT MIN(gross_salary) FROM employees);
 
 -- --------------------------------------------------------------------
 -- 07	Statistical Queries 7: Average Salary
