@@ -118,28 +118,44 @@ JOIN branch_suppliers bs ON c.branch_id = bs.branch_id;
 -- Write & run an SQL query to list all clients and associated total sales from working_with.
 -- --------------------------------------------------------------------
 
-
+USE bas_ictprg431;
+SELECT c.client_name, SUM(w.total_sales) AS total_sales
+FROM working_with w
+JOIN clients c ON w.client_id = c.client_id
+GROUP BY c.client_id, c.client_name;
 
 -- --------------------------------------------------------------------
 -- 11	Join Queries 4: Client and branch Supplier
 -- Write & run an SQL query to find branch ids from both the clients table and branch supplier table by using union
 --------------------------------------------------------------------
 
-
+USE bas_ictprg431;
+SELECT branch_id
+FROM clients
+UNION
+SELECT branch_id
+FROM branch_suppliers;
 
 -- --------------------------------------------------------------------
 -- 12	Join Queries 5: Branch, Supplier & Supplied Products
 -- Write & run an SQL query to list the name of each branch with its related supplier name(s) and product(s) supplied.
 -- --------------------------------------------------------------------
 
-
+USE bas_ictprg431;
+SELECT b.branch_name, bs.supplier_name, bs.product_supplied
+FROM branches b
+JOIN branch_suppliers bs ON b.branch_id = bs.branch_id
+ORDER BY branch_name;
 
 -- --------------------------------------------------------------------
 -- 13	Join Queries 6: Branches and Managers
 -- Write & run an SQL query to list the names of all branches and the names of their managers
 -- --------------------------------------------------------------------
 
-
+USE bas_ictprg431;
+SELECT b.branch_name, CONCAT(e.given_name, ' ', e.family_name) AS manager_name
+FROM branches b
+JOIN employees e ON b.manager_id = e.employee_id;
 
 -- --------------------------------------------------------------------
 -- 14	Join Queries 7: Income and Expenditures
@@ -147,4 +163,8 @@ JOIN branch_suppliers bs ON c.branch_id = bs.branch_id;
 -- (Hint: Where Expenditure is Salaries and Income is Total sales)
 -- --------------------------------------------------------------------
 
+USE bas_ictprg431;
+SELECT 
+    (SELECT SUM(gross_salary) FROM employees) AS total_expenditure,
+    (SELECT SUM(total_sales) FROM working_with) AS total_income;
 
