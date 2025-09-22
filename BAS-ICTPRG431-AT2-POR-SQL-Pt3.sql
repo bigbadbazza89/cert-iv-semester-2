@@ -89,21 +89,29 @@ WHERE gross_salary = (SELECT MIN(gross_salary) FROM employees);
 -- Write & run an SQL query to find average of salaries (use functions sum and count to get an average).
 -- --------------------------------------------------------------------
 
-
+USE bas_ictprg431;
+SELECT SUM(gross_salaries) / COUNT(gross_salaries) AS average_salary
+FROM employees;
 
 -- --------------------------------------------------------------------
 -- 08	Join Queries 1: Employees and Branches
 -- Write & run an SQL query to find a list of employee names and the name of the branch they work at.
 -- --------------------------------------------------------------------
 
-
+USE bas_ictprg431;
+SELECT CONCAT(e.given_name, ' ', e.family_name) AS employee_name, b.branch_name
+FROM employees e
+JOIN branches b ON e.branch_id = b.branch_id;
 
 -- --------------------------------------------------------------------
 -- 09	Join Queries 2: Clients and Branch Suppliers
 -- Write & run an SQL query to find a list of clients and their related branch suppliers’ name.
 -- --------------------------------------------------------------------
 
-
+USE bas_ictprg431;
+SELECT c.client_name, bs.supplier_name
+FROM clients c
+JOIN branch_suppliers bs ON c.branch_id = bs.branch_id;
 
 -- --------------------------------------------------------------------
 -- 10	Join Queries 3: Client and Total Sales
