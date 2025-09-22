@@ -32,6 +32,9 @@
 -- Write & run an SQL query to find the total number of employees
 -- --------------------------------------------------------------------
 
+USE bas_ictprg431;
+SELECT COUNT(*) AS total_employees
+FROM employees;
 
 
 -- --------------------------------------------------------------------
@@ -39,6 +42,9 @@
 -- Write & run an SQL query to find the average totals sales in the working_with table
 -- --------------------------------------------------------------------
 
+USE bas_ictprg431;
+SELECT AVG(total_sales) AS average_sales
+FROM working_with;
 
 
 -- --------------------------------------------------------------------
@@ -46,7 +52,9 @@
 -- Write & run an SQL query to find sum of salaries for all employees
 -- --------------------------------------------------------------------
 
-
+USE bas_ictprg431;
+SELECT SUM(gross_salary) AS total_salaries
+FROM employees;
 
 -- --------------------------------------------------------------------
 -- 04	Statistical Queries 4: Demographics
