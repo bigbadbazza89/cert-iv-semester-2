@@ -102,7 +102,8 @@ CREATE TABLE `clients` (
     `created_at`          TIMESTAMP     DEFAULT CURRENT_TIMESTAMP,
     `updated_at`          TIMESTAMP     ON UPDATE CURRENT_TIMESTAMP, 
     PRIMARY KEY (id),
-    UNIQUE KEY (client_id)
+    UNIQUE KEY (client_id),
+    FOREIGN KEY (branch_id) REFERENCES branches(branch_id)
 );
 
 INSERT INTO `clients`
@@ -127,7 +128,9 @@ CREATE TABLE `working_with` (
     `total_sales`   BIGINT     DEFAULT '0',
     `created_at`    TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
     `updated_at`    TIMESTAMP  ON UPDATE CURRENT_TIMESTAMP, 
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (employee_id) REFERENCES employees(employee_id),
+    FOREIGN KEY (client_id) REFERENCES clients(client_id)
 );
 
 INSERT INTO working_with(employee_id,client_id,total_sales)
@@ -154,7 +157,8 @@ CREATE TABLE `branch_suppliers` (
     `product_supplied` VARCHAR(255)   NOT NULL,
     `created_at`       TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
     `updated_at`       TIMESTAMP  ON UPDATE CURRENT_TIMESTAMP, 
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (branch_id) REFERENCES branches(branch_id)
 );
 
 INSERT INTO branch_suppliers(branch_id,supplier_name,product_supplied)
