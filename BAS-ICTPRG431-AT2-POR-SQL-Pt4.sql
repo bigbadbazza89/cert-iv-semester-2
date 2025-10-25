@@ -79,6 +79,17 @@ WHERE client_id IN (
 -- tables branches and Branch_suppliers that deal with Branch=3.  
 -- --------------------------------------------------------------------
 
+CREATE VIEW suppliers_of_branch_3 AS
+SELECT
+	bs.supplier_name, 
+    b.branch_name,
+    bs.product_supplied
+FROM branches b
+JOIN branch_suppliers bs ON b.branch_id = bs.branch_id
+WHERE b.branch_id = 3;
+
+SELECT * FROM suppliers_of_branch_3;
+
 -- --------------------------------------------------------------------
 -- 05 View 5: Create View
 -- Create a View for supervisor id, name, branch name, branch manager
@@ -86,11 +97,27 @@ WHERE client_id IN (
 -- branch supplier tables for branch id=2. 
 -- --------------------------------------------------------------------
 
+CREATE VIEW branch_2_summary AS 
+SELECT
+	e.supervisor_id,
+    CONCAT(e.given_name, '', e.family_name) AS supervisor_name,
+    b.branch_name AS branch,
+    b.manager_started_at AS manager_start_date,
+    bs.product_supplied
+FROM employees e
+JOIN branches b ON e.branch_id = b.branch_id
+JOIN branch_suppliers bs ON b.branch_id = bs.branch_id
+WHERE b.branch_id = 2;
+
+SELECT * FROM branch_2_summary; 
+
 -- --------------------------------------------------------------------
 -- 06 View 6: Delete View
 -- Drop view that was created in query 04. (Create a View of all the suppliers and
 -- Clients from the tables Clients and Branch_Suppliers that deal with Branch=3 ).
 -- --------------------------------------------------------------------
+
+DROP VIEW IF EXISTS suppliers_of_branch_3;
 
 -- --------------------------------------------------------------------
 -- Procedure 07: Create Procedure
@@ -98,6 +125,16 @@ WHERE client_id IN (
 -- (Hint: - Command to use -select * from employee)
 
 -- --------------------------------------------------------------------
+
+DELIMITER $$
+
+CREATE PROCEDURE employees_summary()
+
+BEGIN
+	SELECT * FROM employees;
+END $$
+
+DELIMITER ;
 
 -- --------------------------------------------------------------------
 -- Procedure 08: Create Procedure
