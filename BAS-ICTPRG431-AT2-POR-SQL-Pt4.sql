@@ -33,6 +33,13 @@
  
 -- --------------------------------------------------------------------
 
+SELECT e.given_name, e.family_name, s.total_sales
+FROM (
+    SELECT employee_id, SUM(total_sales) AS total_sales
+    FROM working_with
+    GROUP BY employee_id) s
+JOIN employees e ON e.employee_id = s.employee_id
+WHERE s.total_sales > 50000;
 
 -- --------------------------------------------------------------------
 -- 02	NESTED QUERIES 2
@@ -41,13 +48,29 @@
 -- Michael Scott (Assume you know Michael's ID).
 -- --------------------------------------------------------------------
 
-
+SELECT c.client_name 
+FROM clients c
+WHERE c.branch_id = (
+    SELECT branch_id
+    FROM branches
+    WHERE manager_id = 102);
 
 -- --------------------------------------------------------------------
 -- 03	NESTED QUERIES 3
 -- Write & run a SQL query to find the names of employees who deals 
 -- with clients of Stamford branch.
 -- --------------------------------------------------------------------
+
+SELECT DISTINCT e.given_name, e.family_name
+FROM employees e
+JOIN working_with w ON e.employee_id = w.employee_id
+WHERE client_id IN (    
+    SELECT client_id
+    FROM clients
+    WHERE branch_id = (
+        SELECT branch_id 
+        FROM branches
+        WHERE branch_name = 'Stamford'));
 
 -- --------------------------------------------------------------------
 
