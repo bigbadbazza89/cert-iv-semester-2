@@ -143,12 +143,28 @@ DELIMITER ;
 
 -- --------------------------------------------------------------------
 
+DELIMITER $$
+
+CREATE PROCEDURE employee_salary(employee_number BIGINT)
+
+BEGIN
+	SELECT 
+    	CONCAT(given_name, ' ', family_name) AS employee_name,
+        gross_salary
+	FROM employees
+    WHERE employee_id = employee_number;
+END $$
+
+DELIMITER ;  
+
 -- --------------------------------------------------------------------
 -- Procedure 09: Delete Procedure
 -- Drop Procedure created in Query 07.
   
 
 -- --------------------------------------------------------------------
+
+DROP PROCEDURE IF EXISTS employees_summary;
 
 -- --------------------------------------------------------------------
 -- Update query 010 UPDATE TABLE STRUCTURE & DATA 
@@ -158,7 +174,13 @@ DELIMITER ;
 -- Table. 
 -- --------------------------------------------------------------------
 
+ALTER TABLE branch_suppliers
+ADD COLUMN manager_name VARCHAR(255);
 
+UPDATE branch_suppliers bs
+JOIN branches b ON bs.branch_id = b.branch_id
+JOIN employees e ON b.manager_id = e.employee_id
+SET bs.manager_name = CONCAT(e.given_name, ' ', e.family_name);
 
 
 
